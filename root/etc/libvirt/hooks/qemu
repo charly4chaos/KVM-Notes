@@ -1,0 +1,20 @@
+#!/bin/bash
+DOMAINNAME=$1
+COMMAND=$2
+
+case ${COMMAND} in
+    "prepare") echo "prepare" ;;
+    "start") echo "start";;
+    "started") 
+	/etc/libvirt/hooks/scripts/tryIsolateCPUs.sh ${DOMAINNAME} ${COMMAND}
+	/etc/libvirt/hooks/scripts/tryToggleDisplay.sh ${DOMAINNAME} ${COMMAND}
+	;;
+    "stopped") 
+	/etc/libvirt/hooks/scripts/tryIsolateCPUs.sh ${DOMAINNAME} ${COMMAND}
+	/etc/libvirt/hooks/scripts/tryToggleDisplay.sh ${DOMAINNAME} ${COMMAND}
+	;;
+    "release") echo "release";;
+    "migrate") echo "migrate";;
+    "restore") echo "restore";;
+    *) echo "Unknown command: ${COMMAND}"
+esac

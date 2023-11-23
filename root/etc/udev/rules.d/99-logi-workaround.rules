@@ -1,0 +1,6 @@
+# This file is a workround
+# The default rules did not create seperated links for my mouse/keyboard
+# Keyboard
+SUBSYSTEM=="input",ATTRS{name}=="Logitech ERGO K860",SYMLINK+="input/by-id/logi-keyboard"
+# Mouse
+SUBSYSTEM=="input",ATTRS{name}=="Logitech MX Master 3",SYMLINK+="input/by-id/logi-mouse"

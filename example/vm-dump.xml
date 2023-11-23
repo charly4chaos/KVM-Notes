@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="/usr/share/libvirt/schemas/domain.rng"?>
+<!-- 
+    This is an example of parameters used to config a vm
+    This is not a complete config
+    This is not inteded to be a complete config
+-->
+<domain type="qemu">
+    <name>demo</name>
+    <metadata>
+        <chaos:chaos xmlns:chaos="libvirt-chaos.xsd">
+            <chaos:tag name="cpu-isolation" />
+            <chaos:tag name="display-toggle" />
+        </chaos:chaos>
+    </metadata>
+</domain>
