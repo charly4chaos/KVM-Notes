@@ -8,7 +8,7 @@
 <domain type="qemu">
     <name>demo</name>
     <metadata>
-        <chaos:chaos xmlns:chaos="libvirt-chaos.xsd">
+        <chaos:chaos xmlns:chaos="https://raw.githubusercontent.com/charly4chaos/KVM-Notes/main/data/libvirt-chaos.xsd">
             <chaos:tag name="cpu-isolation" />
             <chaos:tag name="display-toggle" />
         </chaos:chaos>
