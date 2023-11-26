@@ -3,6 +3,26 @@
    <xs:element name="chaos">
       <xs:complexType>
          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="shutdown">
+               <xs:complexType>
+                  <xs:attribute name="mode" default="ask">
+                     <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="ask"/>
+                           <xs:enumeration value="always"/>
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="timeout" default="60">
+                     <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                           <xs:minInclusive value="1" />
+                           <xs:maxInclusive value="600" />
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
             <xs:element name="tag">
                <xs:complexType>
                   <xs:attribute name="name">

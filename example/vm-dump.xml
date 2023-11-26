@@ -11,6 +11,7 @@
         <chaos:chaos xmlns:chaos="https://raw.githubusercontent.com/charly4chaos/KVM-Notes/main/data/libvirt-chaos.xsd">
             <chaos:tag name="cpu-isolation" />
             <chaos:tag name="display-toggle" />
+            <chaos:shutdown mode="ask" timeout="60" />
         </chaos:chaos>
     </metadata>
 </domain>

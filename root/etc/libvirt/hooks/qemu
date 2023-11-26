@@ -12,6 +12,7 @@ case ${COMMAND} in
     "stopped") 
 	/etc/libvirt/hooks/scripts/tryIsolateCPUs.sh ${DOMAINNAME} ${COMMAND}
 	/etc/libvirt/hooks/scripts/tryToggleDisplay.sh ${DOMAINNAME} ${COMMAND}
+    /etc/libvirt/hooks/scripts/tryShutdown.sh ${DOMAINNAME} ${COMMAND}
 	;;
     "release") echo "release";;
     "migrate") echo "migrate";;
