@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   
    <xs:element name="chaos">
       <xs:complexType>
-         <xs:sequence minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="shutdown">
+         <xs:sequence>
+            <xs:element name="cpu-isolation" minOccurs="0" maxOccurs="1" type="force_empty"/>
+            <xs:element name="display-toggle" minOccurs="0" maxOccurs="1" type="force_empty"/>
+            <xs:element name="shutdown" minOccurs="0" maxOccurs="1">
                <xs:complexType>
                   <xs:attribute name="mode" default="ask">
                      <xs:simpleType>
                         <xs:restriction base="xs:string">
-                           <xs:enumeration value="ask"/>
-                           <xs:enumeration value="always"/>
+                           <xs:enumeration value="ask" />
+                           <xs:enumeration value="always" />
                         </xs:restriction>
                      </xs:simpleType>
                   </xs:attribute>
@@ -23,19 +26,10 @@
                   </xs:attribute>
                </xs:complexType>
             </xs:element>
-            <xs:element name="tag">
-               <xs:complexType>
-                  <xs:attribute name="name">
-                     <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                           <xs:enumeration value="cpu-isolation" />
-                           <xs:enumeration value="display-toggle" />
-                        </xs:restriction>
-                     </xs:simpleType>
-                  </xs:attribute>
-               </xs:complexType>
-            </xs:element>
          </xs:sequence>
       </xs:complexType>
    </xs:element>
+   <xs:complexType name="force_empty">
+      <xs:sequence></xs:sequence>
+   </xs:complexType>
 </xs:schema>

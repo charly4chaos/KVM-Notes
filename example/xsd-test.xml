@@ -1,0 +1,5 @@
+<chaos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../data/libvirt-chaos.xsd">
+<cpu-isolation />
+<display-toggle />
+<shutdown mode="ask" timeout="600"/>
+</chaos>

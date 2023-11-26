@@ -1,9 +1,9 @@
 #!/bin/bash
 # Try to isolate pinned cpus
-# Only takes vms in consideration which use the chaos:tag cpu-isolation
+# Only takes vms in consideration which use the chaos:cpu-isolation
 DOMAIN=$1
 
-XPATH_ISOLATION='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:tag" and @name="cpu-isolation"]'
+XPATH_ISOLATION='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:cpu-isolation"]'
 
 # Check if tag is set for cpu-isolation
 if ! xmllint --xpath "${XPATH_ISOLATION}" /etc/libvirt/qemu/${DOMAIN}.xml 1>/dev/null 2>/dev/null ; then

@@ -1,11 +1,11 @@
 #!/bin/sh
 # Try to toggle displays
-# Only takes vms in consideration which use the chaos:tag display-toggle
+# Only takes vms in consideration which use the chaos:display-toggle
 DOMAIN=$1
 COMMAND=$2
 CONFIGFILE=/etc/libvirt/qemu/${DOMAIN}.xml
 
-XPATH_TOGGLE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:tag" and @name="display-toggle"]'
+XPATH_TOGGLE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:display-toggle"]'
 # Check if tag is set for display-toggle
 if ! xmllint --xpath "${XPATH_TOGGLE}" ${CONFIGFILE} 1>/dev/null 2>/dev/null  ; then
 	echo Display-toggle not enabled for ${DOMAIN}.
