@@ -14,6 +14,10 @@ Define custom tags to be evaluated by the hook scripts:
 ```
 
 # Disk configuration
+## Virtio-SCSI disk
+<details>
+<summary>On my system was an problem with virtio-scsi and QEMU emulator version 7.2.5, so I did not use virtio-scsi</summary>
+
 The disk
 ```xml
 <disk type="block" device="disk">
@@ -30,3 +34,17 @@ The controller
   <address type="pci" domain="0x0000" bus="0x06" slot="0x00" function="0x0"/>
 </controller>
 ```
+</details>
+
+## Virtio disk
+```xml
+<disk type="block" device="disk">
+  <driver name="qemu" type="raw" cache="none" io="native" discard="unmap" iothread="1" queues="4"/>
+  <source dev="/dev/zvol/your-zvol"/>
+  <target dev="vda" bus="virtio"/>
+  <boot order="1"/>
+  <address type="pci" domain="0x0000" bus="0x0b" slot="0x00" function="0x0"/>
+</disk>
+```
+## Troubleshooting
+Workaround for possible error (virtio-blk & zfs?): is discard="ignore" https://gitlab.com/qemu-project/qemu/-/issues/1404, https://gitlab.com/qemu-project/qemu/-/issues/649
