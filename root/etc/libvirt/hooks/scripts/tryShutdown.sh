@@ -10,6 +10,8 @@ XPATH_NODE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:shutdown"]'
 XPATH_MODE="string(${XPATH_NODE}/@mode)"
 XPATH_TIMEOUT="string(${XPATH_NODE}/@timeout)"
 
+. $(dirname $0)/helper.sh
+
 if ! [ ${COMMAND} = "stopped" ]; then
     exit 0
 fi
@@ -23,9 +25,8 @@ fi
 # Read configs
 MODE=$(xmllint --xpath "${XPATH_MODE}" ${CONFIGFILE})
 TIMEOUT=$(xmllint --xpath "${XPATH_TIMEOUT}" ${CONFIGFILE})
-
-export DISPLAY=:0
-export USER=$(ps ho user $(pgrep X))
+export DISPLAY=$(getRunningDisplay)
+export USER=$(getRunningXUser)
 
 case ${MODE:-ask} in
     "shutdown") /usr/sbin/poweroff ;; 
