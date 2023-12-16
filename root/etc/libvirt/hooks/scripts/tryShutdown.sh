@@ -6,7 +6,7 @@ COMMAND=$2
 
 CONFIGFILE=/etc/libvirt/qemu/${DOMAIN}.xml
 
-XPATH_NODE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:shutdown"]'
+XPATH_NODE='/domain/metadata/*["chaos:chaos"]/*["chaos:shutdown"]'
 XPATH_MODE="string(${XPATH_NODE}/@mode)"
 XPATH_TIMEOUT="string(${XPATH_NODE}/@timeout)"
 
@@ -25,11 +25,12 @@ fi
 # Read configs
 MODE=$(xmllint --xpath "${XPATH_MODE}" ${CONFIGFILE})
 TIMEOUT=$(xmllint --xpath "${XPATH_TIMEOUT}" ${CONFIGFILE})
-export DISPLAY=$(getRunningDisplay)
-export USER=$(getRunningXUser)
+export DISPLAY=$(getXwaylandDisplay)
+export USER=$(getXwaylandXUser)
+export XAUTHORITY=$(getXwaylandXAUTHORITY)
 
 case ${MODE:-ask} in
-    "shutdown") /usr/sbin/poweroff ;; 
+    "always") /usr/sbin/poweroff ;; 
     *) sudo -u ${USER} zenity --question --text="Shutdown host? (${TIMEOUT:-60}s)" --timeout=${TIMEOUT:-60} --ok-label=Shutdown --cancel-label=Cancel
        case $? in 
         1) echo "Cancelled" ;; # Cancel

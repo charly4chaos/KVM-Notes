@@ -7,7 +7,7 @@ CONFIGFILE=/etc/libvirt/qemu/${DOMAIN}.xml
 
 . $(dirname $0)/helper.sh
 
-XPATH_TOGGLE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:display-toggle"]'
+XPATH_TOGGLE='/domain/metadata/*["chaos:chaos"]/*["chaos:display-toggle"]'
 # Check if tag is set for display-toggle
 if ! xmllint --xpath "${XPATH_TOGGLE}" ${CONFIGFILE} 1>/dev/null 2>/dev/null  ; then
 	echo Display-toggle not enabled for ${DOMAIN}.
@@ -25,8 +25,9 @@ echo Try display-toggle for ${DOMAIN}
 export DISPLAY_HOST_DEDICATED=HDMI-2
 export DISPLAY_SHARED_WITH_VM=HDMI-1
 
-export DISPLAY=$(getRunningDisplay)
-export USER=$(getRunningXUser)
+export DISPLAY=$(getXwaylandDisplay)
+export USER=$(getXwaylandXUser)
+export XAUTHORITY=$(getXwaylandXAUTHORITY)
 
 case ${COMMAND} in
 	# Adjust this to your local system. Current config: xrandr --current
