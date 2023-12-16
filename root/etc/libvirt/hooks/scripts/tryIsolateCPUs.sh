@@ -3,7 +3,8 @@
 # Only takes vms in consideration which use the chaos:cpu-isolation
 DOMAIN=$1
 
-XPATH_ISOLATION='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:cpu-isolation"]'
+XPATH_ISOLATION="/domain/metadata/*['chaos:chaos']/*['chaos:cpu-isolation']"
+XPATH_ISOLATION_GOVERNOR="string(${XPATH_ISOLATION}/@set-governor)"
 
 # Check if tag is set for cpu-isolation
 if ! xmllint --xpath "${XPATH_ISOLATION}" /etc/libvirt/qemu/${DOMAIN}.xml 1>/dev/null 2>/dev/null ; then
@@ -51,4 +52,21 @@ else
     systemctl set-property --runtime -- user.slice AllowedCPUs=${AVAILABLE_CPUS_PARAM}
     systemctl set-property --runtime -- system.slice AllowedCPUs=${AVAILABLE_CPUS_PARAM}
     systemctl set-property --runtime -- init.scope AllowedCPUs=${AVAILABLE_CPUS_PARAM}
+fi
+
+if [ "$(xmllint --xpath "${XPATH_ISOLATION_GOVERNOR}" /etc/libvirt/qemu/${DOMAIN}.xml 2>/dev/null)" = "yes" ] ; then
+    echo "Try set cpu scaling governor"
+    # Force performance mode on pinned cpu
+    for PINNED_CPU in ${PINNED_CPUS[@]}
+    do 
+        echo performance > /sys/devices/system/cpu/cpu${PINNED_CPU}/cpufreq/scaling_governor
+    done
+
+    # Reset available cores to powersave when any cpu uses powersave mode
+    if  grep "powersave" /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor &>/dev/null; then
+        for AVAILABLE_CPU in ${AVAILABLE_CPUS[@]}
+        do 
+            echo powersave > /sys/devices/system/cpu/cpu${AVAILABLE_CPU}/cpufreq/scaling_governor
+        done
+    fi
 fi

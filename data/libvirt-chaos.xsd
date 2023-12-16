@@ -4,7 +4,18 @@
    <xs:element name="chaos">
       <xs:complexType>
          <xs:sequence>
-            <xs:element name="cpu-isolation" minOccurs="0" maxOccurs="1" type="force_empty"/>
+            <xs:element name="cpu-isolation" minOccurs="0" maxOccurs="1" >
+               <xs:complexType>
+                  <xs:attribute name="set-governor" default="no">
+                     <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                           <xs:enumeration value="no" />
+                           <xs:enumeration value="yes" />
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
             <xs:element name="display-toggle" minOccurs="0" maxOccurs="1" type="force_empty"/>
             <xs:element name="shutdown" minOccurs="0" maxOccurs="1">
                <xs:complexType>

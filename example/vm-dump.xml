@@ -10,7 +10,7 @@
     <metadata>
         <chaos:chaos
             xmlns:chaos="https://raw.githubusercontent.com/charly4chaos/KVM-Notes/main/data/libvirt-chaos.xsd">
-            <chaos:cpu-isolation />
+            <chaos:cpu-isolation set-governor="yes"/>
             <chaos:display-toggle />
             <chaos:shutdown mode="ask" timeout="600" />
         </chaos:chaos>
