@@ -1,5 +1,5 @@
 # libvirt/KVM-Notes
-These are collection of notes/script I use with libvirt/KVM on [Debian bookworm](https://wiki.debian.org/DebianBookworm).
+These are collection of notes/script I use with libvirt/KVM on [Debian trixie](https://wiki.debian.org/DebianTrixie).
 
 Do not confuse this with:
 * A copy & paste source (insert "Think Mark! Think!" meme)
