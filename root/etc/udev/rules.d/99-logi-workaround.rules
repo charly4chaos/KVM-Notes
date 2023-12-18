@@ -1,6 +1,14 @@
 # This file is a workround
+# Find attributes to identify with commands like this: 
+#   udevadm info --attribute-walk --name=/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse
+#   udevadm test $(udevadm info -q path -n /dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-mouse ) 2>/dev/null
+#   udevadm info -ap /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5.1/1-5.1:1.2/0003:046D:C52B.0003/0003:046D:4088.0007/input/input16
+# To reload
+#   udevadm control --reload
+#   udevadm trigger
+#
 # The default rules did not create seperated links for my mouse/keyboard
 # Keyboard
-SUBSYSTEM=="input",ATTRS{name}=="Logitech ERGO K860",SYMLINK+="input/by-id/logi-keyboard"
+SUBSYSTEM=="input",KERNEL=="event[0-9]*",ATTRS{name}=="Logitech ERGO K860",SYMLINK+="input/by-id/logi-keyboard-event"
 # Mouse
-SUBSYSTEM=="input",ATTRS{name}=="Logitech MX Master 3",SYMLINK+="input/by-id/logi-mouse"
+SUBSYSTEM=="input",KERNEL=="event[0-9]*",ATTRS{name}=="Logitech MX Master 3",SYMLINK+="input/by-id/logi-mouse-event"

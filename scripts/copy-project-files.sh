@@ -14,6 +14,11 @@ case ${COMMAND} in
         find /etc/libvirt/hooks -type d -exec chmod 755 {} \; 
         find /etc/libvirt/hooks         -exec chown root:root {} \; 
         ;;
+    "udev")
+        rsync -rv ${PROJECTDIR}/root/etc/udev/rules.d/ /etc/udev/rules.d || exit_with_message "Error copying files" 1
+        find /etc/libvirt/hooks -type f -exec chmod 644 {} \; 
+        find /etc/libvirt/hooks         -exec chown root:root {} \; 
+        ;;
     *) 
     echo "Command ${COMMAND} unknown."
     exit 1;;
