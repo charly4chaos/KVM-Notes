@@ -7,7 +7,7 @@ CONFIGFILE=/etc/libvirt/qemu/${DOMAIN}.xml
 
 . $(dirname $0)/helper.sh
 
-XPATH_TOGGLE='/domain/metadata/*["chaos:chaos"]/*["chaos:display-toggle"]'
+XPATH_TOGGLE='/domain/metadata/*[name()="chaos:chaos"]/*[name()="chaos:display-toggle"]'
 # Check if tag is set for display-toggle
 if ! xmllint --xpath "${XPATH_TOGGLE}" ${CONFIGFILE} 1>/dev/null 2>/dev/null  ; then
 	echo Display-toggle not enabled for ${DOMAIN}.

@@ -3,7 +3,7 @@
 # Only takes vms in consideration which use the chaos:cpu-isolation
 DOMAIN=$1
 
-XPATH_ISOLATION="/domain/metadata/*['chaos:chaos']/*['chaos:cpu-isolation']"
+XPATH_ISOLATION="/domain/metadata/*[name()='chaos:chaos']/*[name()='chaos:cpu-isolation']"
 XPATH_ISOLATION_GOVERNOR="string(${XPATH_ISOLATION}/@set-governor)"
 
 # Check if tag is set for cpu-isolation

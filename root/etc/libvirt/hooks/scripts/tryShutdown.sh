@@ -6,7 +6,7 @@ COMMAND=$2
 
 CONFIGFILE=/etc/libvirt/qemu/${DOMAIN}.xml
 
-XPATH_NODE='/domain/metadata/*["chaos:chaos"]/*["chaos:shutdown"]'
+XPATH_NODE="/domain/metadata/*[name()='chaos:chaos']/*[name()='chaos:shutdown']"
 XPATH_MODE="string(${XPATH_NODE}/@mode)"
 XPATH_TIMEOUT="string(${XPATH_NODE}/@timeout)"
 
