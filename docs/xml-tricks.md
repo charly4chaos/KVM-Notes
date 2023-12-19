@@ -48,3 +48,19 @@ The controller
 ```
 ## Troubleshooting
 Workaround for possible error (virtio-blk & zfs?): is discard="ignore" https://gitlab.com/qemu-project/qemu/-/issues/1404, https://gitlab.com/qemu-project/qemu/-/issues/649
+
+# Looking-Glass
+There is a bug which prevents starting the vm when adding `shmem` device.
+```xml
+<shmem name='looking-glass'>
+  <model type='ivshmem-plain'/>
+  <size unit='M'>256</size>
+</shmem>
+```
+
+The workaround is described here: https://github.com/tianocore/edk2/discussions/4662
+```xml
+<cpu>
+  <maxphysaddr mode='passthrough' limit='39'/>
+</cpu>
+```
