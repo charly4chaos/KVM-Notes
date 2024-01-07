@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ $(whoami) != "root" ]; then
+    echo "Restart as root"
+    sudo $0 $@
+    exit $!
+fi
 PROJECTDIR=$(dirname "${0}")/..
 COMMAND=${1:-INVALID}
 
