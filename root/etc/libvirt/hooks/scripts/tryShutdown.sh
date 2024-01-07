@@ -31,11 +31,13 @@ export XAUTHORITY=$(getXwaylandXAUTHORITY)
 
 case ${MODE:-ask} in
     "always") /usr/sbin/poweroff ;; 
-    *) sudo -u ${USER} zenity --question --text="Shutdown host? (${TIMEOUT:-60}s)" --timeout=${TIMEOUT:-60} --ok-label=Shutdown --cancel-label=Cancel
-       case $? in 
-        1) echo "Cancelled" ;; # Cancel
-        0) /usr/sbin/poweroff ;; # Shutdown
-        *) /usr/sbin/poweroff ;; # Timeout
-       esac
+    *) (
+        sudo -u ${USER} zenity --question --text="Shutdown host? (${TIMEOUT:-60}s)" --timeout=${TIMEOUT:-60} --ok-label=Shutdown --cancel-label=Cancel
+        case $? in 
+            1) echo "Cancelled" ;; # Cancel
+            0) /usr/sbin/poweroff ;; # Shutdown
+            *) /usr/sbin/poweroff ;; # Timeout
+        esac
+    ) &
      ;;
 esac
